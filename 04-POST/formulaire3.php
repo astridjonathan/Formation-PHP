@@ -69,7 +69,7 @@ $email = $sujet = $message = null;
         <!-- Champ Email -->
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email"  class="form-control <?= isset($errors['email']) ? 'is-invalid' : 'is-valid' ?>" 
+            <input type="email"  class="form-control <?= isset($errors['email']) ? 'is-invalid' : '' ?>" 
         
             id="email" name="email" placeholder="name@example.com" value ="<?= $email?>" >
             <div class="invalid-feedback">
@@ -79,7 +79,7 @@ $email = $sujet = $message = null;
         <!-- Champ Sujet -->
         <div class="form-group">
             <label for="sujet">Sujet: </label>
-            <input type="text"  class="form-control <?= isset($errors['sujet']) ? 'is-invalid' : 'is-valid' ?>" 
+            <input type="text"  class="form-control <?= isset($errors['sujet']) ? 'is-invalid' : '' ?>" 
             id="sujet" name="sujet" placeholder="Entrer un sujet..." value ="<?= $sujet?>">
             <div class="invalid-feedback">
                 <?= isset($errors['sujet']) ? $errors['sujet'] :'' ?>
@@ -88,7 +88,7 @@ $email = $sujet = $message = null;
         <!-- Champ Message-->
         <div class="form-group">
             <label for="message">Votre message: </label>
-            <textarea class="form-control <?= isset($errors['message']) ? 'is-invalid' : 'is-valid'?>" 
+            <textarea class="form-control <?= isset($errors['message']) ? 'is-invalid' : ''?>" 
             name="message" id="message" rows="3" ><?= $message?></textarea>
             <div class="invalid-feedback">
                 <?= isset($errors['message']) ? $errors['message'] :'' ?>

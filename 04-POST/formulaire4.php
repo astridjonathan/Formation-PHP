@@ -11,7 +11,89 @@
         3. Si elles sont correctes, vous afficherez un récapitulatif sur la page.
      -->
 
-     <!DOCTYPE html>
+<?php 
+
+    //Initalisation des variables
+    $categorie =  $titre = $annonce = $prix = $content = null;
+    $type = 'offres';
+ 
+    if (!empty($_POST)){ // si $_POST n'est pas vide
+        //Affectation des variables
+        /*$categorie = $_POST['categorie'];
+        $type = $_POST['type'];
+        $titre = $_POST['titre'];
+        $annonce= $_POST['annonce'];
+        $prix = $_POST['prix'];*/
+
+        /**
+         * AU lieu de faire une affectation manuelle, vous pouvez
+         * automatiser la création des variables
+         * --------------------------------------------------------------
+         * La création de variables dynamiques en PHP
+         * https://www.php.net/manual/fr/language.variables.variable.php
+         */
+        foreach($_POST as $cle => $valeur){
+            $$cle = $valeur;
+        }
+
+        // Initialisation du tableau d'erreurs
+        $errors =[];
+
+        if (empty($categorie)){
+            $errors['categorie']= "Veuillez saisir une catégorie";
+        }
+        
+        if (empty( $type)){
+            $errors['type']= "Veuillez cocher le type de l'annonce";
+        }
+       
+        if (empty($titre)){
+            $errors['titre']= "Veuillez entrer un titre pour l'annonce";
+        }
+        if (strlen($annonce)<20){
+            $errors['annonce']= "Veuillez entrer un texte avec 12 caractères min";
+        }
+
+        if (empty($prix)){
+            $errors['titre']= "Veuillez entrer un prix pour l'annonce";
+        }
+        
+        if (!empty($prix) && !filter_var($prix,FILTER_VALIDATE_FLOAT) ){
+            $errors['prix']= "Vérifier le format de votre prix";
+        }
+       
+
+        if(empty($errors) ){
+            $content = '
+                <div class="alert alert-success">
+                Merci, votre annonce: <strong>'.$titre.'</strong>
+                à bien été publiée !
+                <ul>
+                <li>Catégorie choisie:'.$categorie.'</li>
+                <li>Type choisi: '.$type.' </li>
+                <li>Titre: '.$titre.'</li>
+                <li class="text-justify"> Description: '.$annonce.' </li>
+                <li>Prix: '.$prix.'€</li>
+                </ul>
+                </div>
+            ';            
+                // --Réinitalisation des variables (pour effacer le formulaire) sans réinitialiser le content
+                $categorie =  $titre = $annonce = $prix  = null;
+                $type = 'offres';
+        } else {
+            $content = '
+                    <div class="alert alert-danger">
+                        Attention, veuillez bien remplir vos champs.
+                    </div>
+                ';
+        }
+
+    }
+
+
+
+?>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -21,52 +103,77 @@
     <title>Déposer une annonce</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container ">
         <div class="row">
-            <form action="#" method="post">
-                <fieldset>
-                    <h2>Déposer une annonce</h2>
-        
-                   
-                    <div class="form-group">
-                        <label for="categorie">Choisissez une catégorie</label>
-                        <select class="form-control" name="categorie" id="categorie">
-                        <option>Voiture</option>
-                        <option>Logement</option>
-                        <option>Appareil Ménager</option>
-                        <option>Divers</option>
-                        </select>
-                    </div>
-                    <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                    <label class="form-check-label" for="exampleRadios1">
-                        Offres
-                    </label>
-                    </div>
-                    <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                    <label class="form-check-label" for="exampleRadios2">
-                        Demandes
-                    </label>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Titre de l'annonce</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Vente de mon mixeur..">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Texte de l'annonce</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Prix de l'annonce</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="25€">
-                    </div>
+            <div class="col-sm-8  offset-sm-2 mx-auto">
+                <form class="mt-4" method="post">
+                    <fieldset class="border border-dark rounded p-2" >
+                        <h2 class="text-center">Déposer une annonce</h2>
+                        <?= $content ?>
+                        <!-- Champ Catégorie-->
+                        <div class="form-group">
+                            <label class="font-weight-bold" for="categorie">Choisissez une catégorie</label>
+                            <select class="form-control  <?= isset($errors['categorie']) ? 'is-invalid' : '' ?>"  name="categorie" id="categorie" value="<?= $categorie ?>">
+                            <option value=" 0 " selected> -- Nos catégories: --</option>
+                            <option <?= $categorie == 'voiture' ? 'selected':'' ?> value="voiture">Voiture</option>
+                            <option <?= $categorie == "logement" ? 'selected':'' ?> value="logement">Logement</option>
+                            <option <?= $categorie == "multimedia" ? 'selected':'' ?> value="appareil">Multimedia</option>
+                            <option <?= $categorie == "ameublement" ? 'selected':'' ?> value="ameublement">Ameublement</option>
+                            <option <?= $categorie == "divers" ? 'selected':'' ?>value="divers">Divers</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                    <?= isset($errors['categorie']) ? $errors['categorie'] :'' ?>
+                            </div>
+                        </div>
+                        <!-- Champ Offres/Demandes-->
+                        <div class="form-group">  
+                           
+                            <label class="font-weight-bold" for="offre">Sélectionner un type d'annonce</label>
+                            <div class="form-check form-check-inline">
+                            <input <?= $type == "offres" ? 'checked':'' ?> class="form-check-input" type="radio" name="type" id="offres" value="offres">
+                            <label class="form-check-label" for="offres">Offres</label>
+                            </div>
+                            <div class="form-check">
+                            <input <?= $type == "demandes" ? 'checked':'' ?>  class="form-check-input" type="radio" name="type" id="demandes" value="demandes">
+                            <label class="form-check-label" for="demandes">Demandes</label>
+                            </div>
+                             
+                        </div>
+                        <!-- Champ Titre-->
+                        <div class="form-group">
+                            <label class="font-weight-bold" for="titre">Titre de l'annonce</label>
+                            <input type="text" name="titre" class="form-control  <?= isset($errors['titre']) ? 'is-invalid' : '' ?>"  
+                            id="titre" value="<?= $titre?>"placeholder="Vente de mon mixeur.." >
+                            <div class="invalid-feedback">
+                                <?= isset($errors['titre']) ? $errors['titre'] :'' ?>
+                            </div>
+                        </div>
+                        <!-- Champ Description-->
+                        <div class="form-group">
+                            <label class="font-weight-bold" for="texte">Description</label>
+                            <textarea name="annonce" class="form-control  <?= isset($errors['annonce']) ? 'is-invalid' : '' ?>"  id="texte" rows="3"><?= $annonce?></textarea>
+                            <div class="invalid-feedback">
+                                <?= isset($errors['annonce']) ? $errors['annonce'] :'' ?>
+                            </div>
+                        </div>
+                         <!-- Champ Prix -->
+                         <div class="input-group mb-3">
+                            <input type="text" name="prix" value="<?= $prix ?>" 
+                                class="form-control <?= isset($errors['prix']) ? 'is-invalid' : '' ?>" placeholder="Prix de l'annonce...(ex:25€)">
+                            <div class="input-group-append">
+                                <span class="input-group-text">&euro;</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                <?= isset($errors['prix']) ? $errors['prix'] :'' ?>
+                            </div>
+                        </div>
 
-                </fieldset>
+                        <!-- Bouton -->
+                        <button type="submit" name="submit" class="btn btn-block btn-dark">Valider</button>
+                    </fieldset>
 
-            </form>
-            
+                </form>
+            </div>
         </div>
     </div>
 
