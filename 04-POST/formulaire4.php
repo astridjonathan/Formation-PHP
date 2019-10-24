@@ -143,7 +143,7 @@
                         <div class="form-group">
                             <label class="font-weight-bold" for="titre">Titre de l'annonce</label>
                             <input type="text" name="titre" class="form-control  <?= isset($errors['titre']) ? 'is-invalid' : '' ?>"  
-                            id="titre" value="<?= $titre?>"placeholder="Vente de mon mixeur.." >
+                            id="titre" value="<?= $titre?>" placeholder="Vente de mon mixeur.." >
                             <div class="invalid-feedback">
                                 <?= isset($errors['titre']) ? $errors['titre'] :'' ?>
                             </div>

@@ -12,7 +12,7 @@
 </head>
 <body>
     
-        <div class="container-fluid bg-dark"">
+        <div class="container-fluid bg-dark">
             <div class="row">
                 <div class="col">
                     <nav class="navbar navbar-expand-lg "  >
