@@ -23,10 +23,10 @@
                 <div class="collapse navbar-collapse mx-auto" id="navbar">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="./02-formulairePDO.php">Accueil <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link" href="./03-contact.php">Contact</a>
                         </li>
                 
                     </ul>

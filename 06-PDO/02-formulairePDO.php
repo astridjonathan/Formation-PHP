@@ -1,7 +1,7 @@
 <?php
 
     /*
-     * Inclusion d ela connexion à la BDD
+     * Inclusion de la connexion à la BDD
      * ---------------------------------------
      * Grace au require_once, ma variable $db est maintenant
      * disponbile dans cette page.
@@ -36,6 +36,8 @@
             BONUS : Afficher un message de confirmation / d'erreur
             à l'utilisateur grâce à une alerte bootstrap.
     */
+    
+ 
 
     $prenom = $nom = $email =$tel = $sujet = $message = $content = null;
 
@@ -97,17 +99,17 @@
            $query->bindParam(':tel',$tel, PDO::PARAM_INT);
            $query->bindParam(':sujet',$sujet, PDO::PARAM_STR);
            $query->bindParam(':message',$message, PDO::PARAM_STR);
-           $query->execute();
            
+           if ($query->execute()){
+                $content ='
+                    <div class="alert alert-success">
+                        <h3> Nous avons bien pris en compte votre demande</h3>
+                        <p> Merci '.$prenom. ' ' .$nom. ' d\'avoir rempli ce formulaire <br>
+                        Nous reviendrons vers vous dans les plus brefs délais<p>
+                    </div>
 
-            $content ='
-                <div class="alert alert-success">
-                    <h3> Nous avons bien pris en compte votre demande</h3>
-                    <p> Merci '.$prenom. ' ' .$nom. ' d\'avoir rempli ce formulaire <br>
-                    Nous reviendrons vers vous dans les plus brefs délais<p>
-                </div>
-
-            ';
+                ';
+            };
             
             
             $prenom = $nom = $email =$tel = $sujet = $message  = null;
@@ -121,6 +123,7 @@
 
     }
 
+  
     ?>
 
     <div class="container mx-auto">
