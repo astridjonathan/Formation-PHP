@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../js/home.js">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./js/home.js">
     <script src="https://kit.fontawesome.com/5f670c8172.js"></script>
     <title>Astrid JONATHAN CV</title>
 </head>
@@ -17,8 +17,10 @@
                 <div class="col">
                     <nav class="navbar navbar-expand-lg "  >
                         <a class="navbar-brand" href="#">Astrid JONATHAN</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
+                        <button class="navbar-toggler myToggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon myToggler">
+                            
+                          </span>
                         </button>
                       
                         <div class="collapse navbar-collapse mx-auto" id="navbar">

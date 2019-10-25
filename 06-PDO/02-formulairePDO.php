@@ -45,7 +45,7 @@
             $$key = $value;
         }
          //Déclaration des erreurs
-         $erreurs = [];
+         $errors = [];
 
          /*------------------------VERIFICATION DATA ----------------------------------*/
 
@@ -81,7 +81,13 @@
             $errors['message'] ='Votre message est top court 15 caractères min.<br>';
         } 
 
-           /*------------------------INSERTION DANS LA BD  ----------------------------------*/
+           
+           
+
+        // Action à faire si pas d'erreurs
+        if (empty($errors)){
+
+            /*------------------------INSERTION DANS LA BD  ----------------------------------*/
         
            $query = $db->prepare(' INSERT INTO `addcontact` (`prenom`, `nom`, `email`, `tel`,`sujet`,`message`) 
            VALUES (:prenom, :nom, :email, :tel , :sujet , :message )');
@@ -92,9 +98,7 @@
            $query->bindParam(':sujet',$sujet, PDO::PARAM_STR);
            $query->bindParam(':message',$message, PDO::PARAM_STR);
            $query->execute();
-
-        // Action à faire si pas d'erreurs
-        if (empty($errors)){
+           
 
             $content ='
                 <div class="alert alert-success">
@@ -104,6 +108,8 @@
                 </div>
 
             ';
+            
+            
             $prenom = $nom = $email =$tel = $sujet = $message  = null;
         }else {
             $content ='
@@ -121,6 +127,7 @@
         <form method="POST"  class="m-3">
             <fieldset class="border rounded p-3" >
                 <h2 class="text-center">Me Contacter</h2>
+                <?= $content ?>
                 <!-- Nom et prénom-->
                 <div class="row">
                     <div class="form-group col-6">

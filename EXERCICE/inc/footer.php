@@ -1,5 +1,5 @@
 
-<footer class="fixed-bottom">
+<footer>
     <div class="pt-4 container-fluid bg-dark text-white">
     <!-- Elements du Footer -->
         <div class="row">
