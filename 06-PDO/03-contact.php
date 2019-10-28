@@ -18,10 +18,13 @@
 */
     require_once 'config/database.php';
     include_once  './inc/header.php';
+    
     $content=null;
     $query = $db->prepare('SELECT * from addcontact');
     $query->execute();
     $contacts = $query->fetchAll();
+   
+    //$nbdemande= $query-> rowCount();
    
     if (isset($_GET['supp'])){
         $id= $_GET['supp'];
@@ -38,7 +41,7 @@
     <div class="row">
         <div class="col">
             <table class="table table-dark mt-4">
-                <h2 class="text-center mt-2 text-warning">Mes demandes de contact</h2>
+                <h2 class="text-center mt-2 text-warning">Mes Demandes de Contact</h2>
                 <?= $content ?>
                 <thead>
                     <tr class="text-center">
@@ -53,6 +56,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php
+                        if (empty($contacts)){?>
+                            <tr>
+                                <td colspan="8">
+                                    <div class="alert alert-warning">
+                                        Pas de demande pour le moment....
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     <?php foreach ($contacts as $contact) { ?>
                         <!-- creation condition-->
                         <tr>
@@ -63,7 +76,7 @@
                             <td><?=$contact['tel']?></td>
                             <td><?=$contact['sujet']?></td>
                             <td><?=$contact['message']?></td>
-                            <td><a name="modif" class="btn btn-warning" href="03-contact.php?modif= <?= $contact['id']?>">Modifier</a></td>
+                            <td><a name="modif" class="btn btn-warning" href="./action/modify.php?id= <?= $contact['id']?>">Modifier</a></td>
                             <td><a name="supp" class="btn btn-danger" href="03-contact.php?supp= <?= $contact['id']?>">Supprimer</a></td>
                         </tr>   
                     <?php }  //fin du foreach ?>
@@ -72,3 +85,5 @@
         </div>
     </div>
 </div>
+
+<?php include_once  './inc/footer.php';?>
