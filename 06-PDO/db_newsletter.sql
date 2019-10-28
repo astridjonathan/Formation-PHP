@@ -1,0 +1,8 @@
+CREATE DATABASE newsletter;
+
+CREATE TABLE newsletter (
+`id` INT(11) NOT NULL AUTO_INCREMENT,
+`nomcomplet` VARCHAR(160) NOT NULL,
+`email` VARCHAR(80) NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4; 
