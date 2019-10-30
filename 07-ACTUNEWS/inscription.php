@@ -54,8 +54,8 @@ require_once(__DIR__ . '/partials/header.php');
 
 <div class="container mx-auto ">
     <div class="row ">
-        <div class="col-md-6 offet-md-3" >
-            <form method="post" class="form-horizontal">
+        <div class="col-md-6 offet-md-3 mx-auto" >
+            <form method="post" class="form-horizontal ">
                 <div class="form-group">
                     <input type="text" name="prenom" class="form-control <?= isset($errors['prenom']) ? 'is-invalid' : '' ?>" 
                     value="<?= $prenom?>" placeholder="Prénom.">

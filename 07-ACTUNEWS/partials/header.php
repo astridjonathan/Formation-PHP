@@ -37,18 +37,19 @@
 <!-- Menu du site -->
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Actunews971</a>
+        <a class="navbar-brand" href="index.php">Actunews971</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto text-center">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php">Accueil <span class="sr-only">(current)</span></a>
                 </li>
                 <?php foreach ($categories as $categorie) {?>
                     <li class="nav-item">
-                    <a class="nav-link" href="categorie.php?nom_categorie= <?= $categorie['nom'] ?>"><?= $categorie['nom'] ?> </a>
+                    <a class="nav-link" href="categorie.php?nom_categorie=<?= $categorie['nom'] ?>&id_categorie=<?= $categorie['id'] ?>">
+                        <?= $categorie['nom'] ?></a>
                 </li>
                 <?php } ?>
             </ul>

@@ -41,7 +41,7 @@ require_once(__DIR__ . '/partials/header.php');
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6 offet-md-3">
+        <div class="col-md-6 offet-md-3 mx-auto">
             <form method="post" class="form-horizontal">
                 <div class="form-group">
                     <input type="email" name="email" class="form-control  <?= isset($errors['email']) ? 'is-invalid' : '' ?>" 
