@@ -1,14 +1,9 @@
 <?php 
     //Récupération du nom de la catégorie
     //$nom_categorie = (isset($_GET['nom_categorie'])) ? $_GET['nom_categorie'] : '';
-    $articles = getArticles() ;
+    $categories =  getCategories();
 
 
-
-
-?>
-
-<?php
 //Inclusion du header sur la page
 require_once(__DIR__ . '/partials/header.php');
 ?>

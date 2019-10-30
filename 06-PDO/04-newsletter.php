@@ -1,4 +1,27 @@
 <?php
+    
+    /*
+    OBJECTIF : 
+        Développer un système de newsletter.
+
+    EXERCICE :
+
+    I. Créer une base de donnée 'newsletter' permettant de stocker :
+        - nomcomplet (prénom + nom) dans le même champ SQL ;
+        - email
+
+    II. Créer un Formulaire permettant la saisie de ces champs.
+
+    III. Après vérification (uniquement l'email est obligatoire), 
+    insérez les données saisies dans la base.
+
+    IV. Afficher dans un tableau les inscrits
+
+    V. BONUS : Mettez en place un système de désinscription.
+
+*/
+    
+    
     require_once 'config/database.php'; 
     require_once 'config/dbNewsletter.php';
     include_once  './inc/header.php';
@@ -71,13 +94,13 @@
     }*/
 
     
-    if (!empty($_GET)) {
+    if (!empty($_GET) ?? 0 ) {
         $email = $_GET['email'];
         $query = $db->prepare('DELETE from newsletter WHERE email = :email');
         $query->bindValue(':email',$email, PDO::PARAM_STR);
             if ($query->execute()){
                 $content= '<div class="alert alert-success">
-                    Vous ne faite plus parti(e) de notre liste.
+                    Vous ne faites plus parti(e) de notre liste.
                 </div>';
             }
 
@@ -117,18 +140,28 @@
                     </div>
                 </div>
             </form>
-            
-            <form method="get">
+            <hr class="bg-white">
+            <div class="col">
+                <h2 class="display-4 text-white" >Désinscription</h2
+                    <form method="get">
+                        <div class="form-group">
+                            <input type="text" name="email" class="form-control" 
+                                placeholder="john.doe@email.com">
+                        </div>
+                        <button class="btn btn-danger btn-block">
+                            Me désinscrire</button>
+            </div>
+            <!-- <form method="get">
                 <div class="col">
                     <div class="input-group mb-3 ">
                         <input type="email" name="email" class="form-control"
                             placeholder="Entrez votre email..." value="<?php $email ?>">
-                        <?php if ($email  == $email['email']  ) { ?>
-                        <a name="desabonner" type="submit" class="btn btn-danger " href="04-newsletter.php?desabonner=  <?= $email['email']?>" >DESABONNER</a>
+                        <?php if ($_GET['email']  == $_POST['email']  ) { ?>
+                        <a name="desabonner" type="submit" class="btn btn-danger " href="04-newsletter.php?desabonner=  <?= $_POST['email'] ?>" >DESABONNER</a>
                                 <?php } ?>
                     </div>
                 </div>
-            </form>
+            </form> -->
 		</div>
 
         <?php require_once './inc/footer.php';?>

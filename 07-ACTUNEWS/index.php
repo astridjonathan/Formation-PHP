@@ -19,7 +19,7 @@ $articles = getArticles();
             <?php foreach ($articles as $article) { ?>
                 
             <div class="col-md-4 mt-4">
-                <div class="card">
+                <div class="card shadow-sm">
                     <img class="card-img-top" src="assets/img/article/<?= $article['image'] ?>" 
                      alt="<?= $article['titre'] ?>">
                     <div class="card-body">
@@ -27,7 +27,11 @@ $articles = getArticles();
                         <div class="card-text">
                             <?= summarize($article['contenu']) ?>
                         </div>
-                        <a href="#" class="btn btn-primary">Lire la suite</a>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#" class="btn btn-primary">Lire la suite</a>
+                            <small class="text-muted"><?= $article['prenom'] . ' '.  $article['nom'] ?></small>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

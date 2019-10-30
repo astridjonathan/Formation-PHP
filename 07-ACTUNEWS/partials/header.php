@@ -1,14 +1,20 @@
 <?php
+     // Récupérations de nos fonctions globales
+    require_once(__DIR__ . '/../functions/global.php');
+
     //Connexion à la BDD
     require_once(__DIR__ . '/../config/database.php');
-    //$categories = ['Politique', 'Economie', 'Culture','Sports'];
+   
     
     // Récupérations de nos fonctions
     require_once(__DIR__ . '/../functions/categorie.php');
     require_once(__DIR__ . '/../functions/article.php');
-    require_once(__DIR__ . '/../functions/global.php');
+ 
     
-    //---Récupéraation categorie provenant de la bdd ----//
+    //---Récupération categorie provenant de la bdd ----//
+     //$categories = ['Politique', 'Economie', 'Culture','Sports'];
+
+     
     $categories  =  getCategories();
  
 
@@ -42,7 +48,7 @@
                 </li>
                 <?php foreach ($categories as $categorie) {?>
                     <li class="nav-item">
-                    <a class="nav-link" href="categorie.php?nom_categorie=<?= $categorie['nom'] ?>"><?= $categorie['nom'] ?> </a>
+                    <a class="nav-link" href="categorie.php?nom_categorie= <?= $categorie['nom'] ?>"><?= $categorie['nom'] ?> </a>
                 </li>
                 <?php } ?>
             </ul>
