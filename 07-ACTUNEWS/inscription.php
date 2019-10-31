@@ -39,7 +39,12 @@ require_once(__DIR__ . '/partials/header.php');
             $errors['password']="Les mots de passe ne correspondent pas";
          }
 
-
+         if(empty($errors)){
+             if( inscription($prenom, $nom, $email, $password)){
+                 //redirection sur la page de conenxion
+                 redirection('connexion.php?inscription=success&email='.$email);
+             }
+         }
 
     } // Fin du if $_POST
 
@@ -85,7 +90,7 @@ require_once(__DIR__ . '/partials/header.php');
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="password" name="cf-password" class="form-control <?= isset($errors['password']) ? 'is-invalid' : '' ?>"
+                    <input type="password" name="cfPassword" class="form-control <?= isset($errors['password']) ? 'is-invalid' : '' ?>"
                      placeholder="Confirmer le Mot de passe.">
                 </div>
                 <button class="btn btn-block btn-dark">M'inscrire</button>

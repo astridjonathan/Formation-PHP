@@ -28,7 +28,8 @@ $articles = getArticles();
                             <?= summarize($article['contenu']) ?>
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="article.php?id_article=<?=$article['id']?>" class="btn btn-primary">Lire la suite</a>
+                        
+                        <a href="article.php?id_article=<?=$article['id']?>" class="btn btn-primary">Lire la suite</a>
                             <small class="text-muted"><?=$article['prenom']. ' '.$article['nom']?></small>
                         </div>
                         

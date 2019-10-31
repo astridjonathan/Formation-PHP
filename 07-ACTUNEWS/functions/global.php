@@ -5,6 +5,17 @@
  *  Utilisable sur toutes les pages.
  */
 
+ session_start(); //Démarrage de la session PHP
+
+// Permet de rediriger un utilisateur sur une nouvelle page
+function redirection($page){
+    header('Location: '.$page);
+}
+
+//Permet de vérifier si auteur est connecté en session
+function isOnline(){
+    return isset($_SESSION['auteur']) ? $_SESSION['auteur'] : false; 
+}
 //-- Permet de générer une accroche / un résumé
  function summarize($text){
     //suppression des balises HTML

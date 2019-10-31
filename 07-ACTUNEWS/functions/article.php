@@ -4,7 +4,7 @@
 
 function  getArticles()  {
     global $db;
-    $query = $db->query('SELECT * FROM article, auteur
+    $query = $db->query('SELECT *, article.id AS "id"  FROM article, auteur
      WHERE article.auteur_id = auteur.id  ORDER BY article.id DESC');
     return $query->fetchAll();
     
@@ -27,7 +27,7 @@ function  getArticleById($article_id) {
 
 function  getArticlesByCategorieId($categorie_id) {
     global $db;
-    $sql= 'SELECT * FROM article, auteur WHERE 
+    $sql= 'SELECT *, article.id AS "id"  FROM article, auteur WHERE 
     article.auteur_id = auteur.id AND article.categorie_id = :id';
     $query = $db->prepare($sql);
     $query->bindValue(':id', $categorie_id);

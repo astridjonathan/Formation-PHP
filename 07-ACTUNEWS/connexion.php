@@ -7,24 +7,33 @@ require_once(__DIR__ . '/partials/header.php');
     $errors =[];
     
     if (!empty($_POST)) {
-
          //Affectation des variables
          foreach ($_POST as $key => $value) {
             $$key = $value;
         }
 
-
          //Vérification email
          if (empty($email)){
             $errors['email']="Veuillez entrer un email..";
          }
-                 //Vérification password
+        
+         //Vérification password
          if (empty($password)){
             $errors['password']="Vous avez oublié le mot de passe";
          }
-
+        
+       
 
          if(empty($errors)){
+
+            // Début du processus de connexion
+            if (login($email, $password)){
+                //User connecté fonction a retourné vrai
+               redirection('.');
+            }else{
+                $errors['email'] = "Email/ Mot de passe incorrect";
+            }
+             
 
          }
 
@@ -42,10 +51,15 @@ require_once(__DIR__ . '/partials/header.php');
 <div class="container">
     <div class="row">
         <div class="col-md-6 offet-md-3 mx-auto">
+            <?php  if(isset($_GET['inscription'])) {?>
+                <div class="alert alert-success">
+                    Félicitation, vous pouvez vous connecter.
+                </div>
+            <?php } ?>
             <form method="post" class="form-horizontal">
                 <div class="form-group">
                     <input type="email" name="email" class="form-control  <?= isset($errors['email']) ? 'is-invalid' : '' ?>" 
-                    value="<?= $email?>" placeholder="Email.">
+                    value="<?= $email ?? $_GET['email'] ?? '' ?>" placeholder="Email.">
                     <div class="invalid-feedback">
                         <?= isset($errors['email']) ? $errors['email']:'' ?>
                     </div>

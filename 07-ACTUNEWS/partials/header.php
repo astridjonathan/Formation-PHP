@@ -9,6 +9,7 @@
     // Récupérations de nos fonctions
     require_once(__DIR__ . '/../functions/categorie.php');
     require_once(__DIR__ . '/../functions/article.php');
+    require_once(__DIR__ . '/../functions/auteur.php');
  
     
     //---Récupération categorie provenant de la bdd ----//
@@ -16,7 +17,9 @@
 
      
     $categories  =  getCategories();
- 
+    // SI un auteur est en session alors $auteur prendra comme vameur le tableau d'auteur sinon false
+    // sinon faire un if online() avant les balsie de connexion et inscription
+    $auteurIsLogged = isOnline();
 
 ?>
 
@@ -54,8 +57,15 @@
                 <?php } ?>
             </ul>
             <div class="text-right">
+
+                <a class="nav-item btn btn-outline-warning mx-2" href="creer-un-article.php">Créer un article</a>
+                <?php if ($auteurIsLogged){ ?>
+                    <span class="navbar-text mx-2">Bonjour <strong><?= $auteurIsLogged['prenom']?></strong></span>
+                    <a class="nav-item btn btn-outline-primary mx-2" href="deconnexion.php">Déconnexion</a>
+                <?php } else { ?>
                 <a class="nav-item btn btn-outline-primary mx-2" href="connexion.php">Connexion</a>
-                <a class="nav-item btn btn-outline-primary mx-2" href="inscription.php">Inscription</a>
+                <a class="nav-item btn btn-outline-info mx-2" href="inscription.php">Inscription</a>
+                <?php } ?>
             </div>
         </div>
     </nav>

@@ -24,7 +24,7 @@
     <div class="container ">
         <div class="row">
             <div class="col-md-6">
-                <img class="img-fluid" src="./assets/img/article/<?=$article['image']?>" alt="<?=$article['titre']?>">
+                <img class="img-fluid" src="assets/img/article/<?=$article['image']?>" alt="<?=$article['titre']?>">
             </div> <!-- Fin col-md-6 -->
             <div class="col-md-6">
                 <?=$article['contenu']?>
