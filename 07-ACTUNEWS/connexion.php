@@ -29,7 +29,7 @@ require_once(__DIR__ . '/partials/header.php');
             // Début du processus de connexion
             if (login($email, $password)){
                 //User connecté fonction a retourné vrai
-               redirection('.');
+               redirection('mes-articles.php');
             }else{
                 $errors['email'] = "Email/ Mot de passe incorrect";
             }

@@ -20,6 +20,8 @@
     // SI un auteur est en session alors $auteur prendra comme vameur le tableau d'auteur sinon false
     // sinon faire un if online() avant les balsie de connexion et inscription
     $auteurIsLogged = isOnline();
+   $auteur= $auteurIsLogged;
+   //var_dump($auteur['id']);
 
 ?>
 
@@ -33,7 +35,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- CSS PERSO -->
     <link rel="stylesheet" href="assets/css/style.css">
+     <!-- CDN CKEDITOR -->
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     <title>Guadeloupe Actualités</title>
+    
 </head>
 <body>
 
@@ -58,9 +63,11 @@
             </ul>
             <div class="text-right">
 
-                <a class="nav-item btn btn-outline-warning mx-2" href="creer-un-article.php">Créer un article</a>
+                
                 <?php if ($auteurIsLogged){ ?>
-                    <span class="navbar-text mx-2">Bonjour <strong><?= $auteurIsLogged['prenom']?></strong></span>
+                    <span class="navbar-text mx-2">Bonjour <strong><?= $auteurIsLogged['prenom']?>,</strong></span>
+                    <a class="nav-item btn btn-outline-warning mx-2" href="creer-un-article.php">Créer un article</a>
+                    <a class="nav-item btn btn-outline-info mx-2" href="mes-articles.php?id_auteur=<?= $auteur['id'] ?>">Mes Articles</a>
                     <a class="nav-item btn btn-outline-primary mx-2" href="deconnexion.php">Déconnexion</a>
                 <?php } else { ?>
                 <a class="nav-item btn btn-outline-primary mx-2" href="connexion.php">Connexion</a>

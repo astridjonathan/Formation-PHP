@@ -36,3 +36,29 @@ function  getArticlesByCategorieId($categorie_id) {
     
 }
 
+
+function  getArticlesByAuteurId($auteur_id) {
+    global $db;
+    $sql= 'SELECT *, auteur.id AS "id"  FROM article, auteur WHERE 
+     article.auteur_id = auteur.id AND auteur.id = :id';
+    $query = $db->prepare($sql);
+    $query->bindValue(':id', $auteur_id, PDO::PARAM_INT);
+    $query->execute();
+    return $query->fetchAll();
+   
+}
+
+function addArticle( $auteur_id, $categorie_id, $titre, $contenu, $image ){
+    global $db;
+    $query = $db->prepare('INSERT INTO article (titre, contenu, image, categorie_id, auteur_id) VALUES (:titre, :contenu, :image, :categorie_id, :auteur_id)');
+    $query->bindValue(':titre', $titre, PDO::PARAM_STR);
+    $query->bindValue(':contenu', $contenu, PDO::PARAM_STR);
+    $query->bindValue(':image', $image, PDO::PARAM_STR);
+    $query->bindValue(':categorie_id', $categorie_id, PDO::PARAM_INT);
+    $query->bindValue(':auteur_id', $auteur_id, PDO::PARAM_INT); 
+
+    // Si article a bien été inséré alors je retourne l'id de l'article sinon faux
+    return $query->execute() ? $db->lastInsertId() : false;
+    
+
+}

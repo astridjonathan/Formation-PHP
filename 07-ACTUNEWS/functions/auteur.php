@@ -47,6 +47,13 @@
         }
         return false;
     }
+
+
+
+    function deconnexion() {
+        unset($_SESSION['auteur']);
+        return true;
+    }
     
     
     // Récupération de tous les auteurs de la BDD 
