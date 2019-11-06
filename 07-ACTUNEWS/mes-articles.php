@@ -9,16 +9,28 @@
     //$nom_auteur = (isset($_GET['nom_auteur'])) ? $_GET['nom_auteur'] : '';
     // Récupération de l'ID de l'auteur dans l'URL
     $auteur =  isOnline(); 
-    $id_auteur = (isset($_GET['id_auteur '])) ? $_GET['id_auteur '] : 0;
+    $auteurID = (isset($_GET['id_auteur'])) ? $_GET['id_auteur'] : 0;
     //$id_auteur   = $auteur['id '];
-    var_dump($id_auteur );
+   //var_dump($auteurID);
    
     // Je récupère les articles de la catégorie
-    $articles = getArticlesByAuteurId($id_auteur);
-    var_dump($articles);
+    $articles = getArticlesByAuteurId($auteurID);
+    //var_dump($articles);
     //$articles= getArticlesByAuteurId($_GET['id_auteur'] ?? 0) ;
   
-  
+    if (isset($_GET['supp'])){
+        $idArticle= $_GET['supp'];
+        var_dump($auteurID);
+        $delete=$db->prepare('DELETE from article WHERE id = :id');
+        $delete->bindValue(':id',$idArticle, PDO::PARAM_INT);
+     
+            if ($delete->execute()){
+                redirection(' ./mes-articles.php?id_auteur= '.$auteurID);
+            }else{
+                redirection(' ./erreur404.php');
+            }
+    
+    }
 
   
 ?>
@@ -40,10 +52,10 @@
             <thead>
                     <tr class="text-center">
                     <th scope="col">Titre</th>
-                    <th scope="col">Contenu</th>
                     <th scope="col">Image</th>
                     <th scope="col">Date de création</th>
                     <th scope="col">Catégorie</th>
+                    <th scope="col">Contenu</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,12 +73,12 @@
                         <!-- creation condition-->
                         <tr>
                             <td><?=$article['titre']?></td>
-                            <td><?=$article['contenu']?></td>
                             <td><?=$article['image']?></td>
                             <td><?=$article['date_creation']?></td>
                             <td><?=$article['categorie_id']?></td>
-                            <td><a name="modif" class="btn btn-warning" href="./action/modify.php?id= <?= $contact['id']?>">Modifier</a></td>
-                            <td><a name="supp" class="btn btn-danger" href="03-contact.php?supp= <?= $contact['id']?>">Supprimer</a></td>
+                            <td><?=summarize($article['contenu'])?></td>
+                            <td><a name="modif" class="btn btn-warning" href="./action/modify.php?id= <?= $article['id']?>">Modifier</a></td>
+                            <td><a name="supp" class="btn btn-danger" href="mes-articles.php?supp= <?= $article['id']?>">Supprimer</a></td>
                         </tr>   
                     <?php }  //fin du foreach ?>
                 </tbody>
