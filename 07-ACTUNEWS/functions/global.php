@@ -26,7 +26,7 @@ function isOnline(){
     // Si mon string est > à 150
     if (strlen($string > 70 )){
         // Je coupe ma chaine à 70
-        $stringCut = substr($string, 0 , 70);
+        $stringCut = substr($string, 0 ,70);
         //Je m'assure de couper un mot en recherchant derniere position
         $string = substr($stringCut, 0 , strrpos($stringCut, ' '));
         

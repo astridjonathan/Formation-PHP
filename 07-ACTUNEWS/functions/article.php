@@ -62,3 +62,15 @@ function addArticle( $auteur_id, $categorie_id, $titre, $contenu, $image ){
     
 
 }
+
+
+function deleteArticle($article_id){
+        global $db;
+        $delete=$db->prepare('DELETE from article WHERE id = :id');
+        $delete->bindValue(':id',$article_id, PDO::PARAM_INT);
+            if ($delete->execute()){
+                header('location: ./mes-articles.php?id.php');
+            }
+    
+
+}

@@ -10,22 +10,21 @@ if(!$auteur){
     redirection('connexion.php'); // Redirection sur accueil ou creation page acces refuse.php
 }
 
-
-
-$categories  =  getCategories();
+//$categories  =  getCategories();
 
 // var_dump($id_auteur);
+//var_dump($id_categorie);
 
-$titre = $contenu = $image = null;
+$titre = $contenu = $image =$id_categorie = null;
 
 if (!empty($_POST)){
      //Affectation des variables
     $titre      = $_POST['titre'];
     $contenu     = $_POST['contenu'];
     $image      = $_FILES['image']; // Je récupere un fichier avec la superglobale $_FILES
-    $id_categorie   = $_POST['categorie_id '];
-    $id_auteur     = $auteur['id '];
-    var_dump($id_auteur);
+    $id_categorie   = $_POST['id_categorie'];
+    $id_auteur     = $auteur['id'];
+ 
  
 
 
@@ -55,7 +54,7 @@ if (!empty($_POST)){
     if (empty($titre)){
         $errors['titre']="Veuillez saisir un titre";
      }
-      //Vérification du titre (Supérieur 100)
+     
     if (!empty($titre) && strlen($titre) > 100){
         $errors['titre'] ='Votre titre  est trop long';
     } 
@@ -65,7 +64,6 @@ if (!empty($_POST)){
         $errors['contenu'] ='Vous avez oublié le contenu..';
     } 
 
-    //Vérification du message (Supérieur à 15)
     if (!empty($contenu) && strlen($contenu) < 70){
         $errors['contenu'] ='Votre contenu est top court 70caractères min.<br>';
     } 
@@ -88,7 +86,7 @@ if (!empty($_POST)){
         
         $titre = $contenu = $image = null;
     }
-var_dump($errors);
+
 }
 
 ?>
@@ -130,15 +128,12 @@ var_dump($errors);
                             <!-- Choisir une  catégorie-->
                     
                             <div class="form-group">
-                                <select class="form-control" name="id_categorie" id="id_categorie_id">
+                                <select class="form-control" name="id_categorie" id="id_categorie">
                                     <?php foreach ($categories as $categorie) {?>
                                     <option <?= ($categorie['id'] == $id_categorie) ? 'selected' : '' ?>
                                     value="<?= $categorie['id'] ?>"><?= $categorie['nom'] ?></option>
                                     <?php } ?>
                                 </select>
-                                <div class="invalid-feedback">
-                                    <?= isset($errors['id_categorie']) ? $errors['id_categorie']:'' ?>
-                                </div>
                             </div>
                         
                         

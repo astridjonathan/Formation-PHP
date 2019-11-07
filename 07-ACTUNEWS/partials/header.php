@@ -20,7 +20,7 @@
     // SI un auteur est en session alors $auteur prendra comme vameur le tableau d'auteur sinon false
     // sinon faire un if online() avant les balsie de connexion et inscription
     $auteurIsLogged = isOnline();
-   $auteur= $auteurIsLogged;
+    $auteur= $auteurIsLogged;
    //var_dump($auteur['id']);
 
 ?>
